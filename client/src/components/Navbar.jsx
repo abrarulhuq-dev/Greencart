@@ -37,7 +37,7 @@ const Navbar = () => {
                     <button className="absolute -top-2 -right-3 text-xs text-white bg-primary w-[18px] h-[18px] rounded-full">3</button>
                 </div>
 
-                { !user ? (<button onClick={()=> setshowuserlogin(true)} className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
+                { !user ? (<button onClick={()=>{setshowuserlogin(true)}} className="cursor-pointer px-8 py-2 bg-primary hover:bg-primary-dull transition text-white rounded-full">
                     Login
                 </button>)
                 :
@@ -61,7 +61,7 @@ const Navbar = () => {
 
             {/* Mobile Menu */}
             {open && (
-                <div className={`${open ? 'flex' : 'hidden'} absolute top-[60px] left-0 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}>
+                <div className={`${open ? 'flex' : 'hidden'} absolute top-[60px] left-0 z-1 w-full bg-white shadow-md py-4 flex-col items-start gap-2 px-5 text-sm md:hidden`}>
                     <NavLink to={'/'} onClick={() => setOpen(false)}>Home</NavLink>
                     <NavLink to={'/product'} onClick={() => setOpen(false)}>All Product</NavLink>
                     {user &&

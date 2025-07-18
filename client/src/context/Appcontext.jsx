@@ -79,11 +79,11 @@ export const AppContextProvider = ({ children }) => {
     })
 
     const value = {
-        navigate, user,
+        navigate, user, showuserlogin,
         setUser, setIsseller, Isseller,
         products, currency, addToCart,
         updatecartitem, removeFromCart,
-        cartitems,
+        setshowuserlogin,cartitems, 
 
 
     }
