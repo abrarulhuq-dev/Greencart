@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { assets } from '../assets/greencart_assets/assets'
 import { useAppContext } from '../context/Appcontext'
 
 const Navbar = () => {
 
-    const [open, setOpen] = React.useState(false)
+    const [open, setOpen] = useState(false)
     const { user, setUser, setshowuserlogin, navigate } = useAppContext();
 
     const logout = async () => {
