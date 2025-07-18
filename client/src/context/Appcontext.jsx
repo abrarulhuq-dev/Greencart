@@ -13,6 +13,7 @@ export const AppContextProvider = ({ children }) => {
     const [showuserlogin, setshowuserlogin] = useState(false);
     const [products, setProducts] = useState([]);
     const [cartitems, setCartItems] = useState({});
+    const [searchquery, setsearchquery] = useState({});
 
     const currency = '₹'
 
@@ -61,7 +62,7 @@ export const AppContextProvider = ({ children }) => {
         if (cartdata[itemId]) {
 
             cartdata[itemId] -= 1;
-            
+
             if (cartdata[itemId] === 0) {
                 delete cartdata[itemId];
 
@@ -74,6 +75,8 @@ export const AppContextProvider = ({ children }) => {
         setCartItems(cartdata)
     }
 
+
+
     useEffect(() => {
         fetchProducts()
     })
@@ -83,7 +86,8 @@ export const AppContextProvider = ({ children }) => {
         setUser, setIsseller, Isseller,
         products, currency, addToCart,
         updatecartitem, removeFromCart,
-        setshowuserlogin,cartitems, 
+        setshowuserlogin, cartitems,
+        searchquery, setsearchquery,
 
 
     }

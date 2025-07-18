@@ -9,11 +9,11 @@ import Newsletter from '../components/Newsletter'
 const Home = () => {
   return (
     <div className='mt-10'>
-        <Banner/>
-        <Categories/>
-        <BestSeller/>
-        <BottomBanner/>
-        <Newsletter/>
+      <Banner />
+      <Categories />
+      <BestSeller />
+      <BottomBanner />
+      <Newsletter />
     </div>
   )
 }
