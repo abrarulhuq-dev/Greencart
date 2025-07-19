@@ -66,7 +66,7 @@ const Productdetails = () => {
                     <div className="flex items-center gap-0.5 mt-1">
                         {Array(5).fill('').map((_, i) => (
 
-                            <img className='md:w-4 w-3.5' src={i < 4 ? assets.star_icon : assets.star_dull_icon} alt="" />
+                            <img key={i} className='md:w-4 w-3.5' src={i < 4 ? assets.star_icon : assets.star_dull_icon} alt="" />
 
                         ))}
                         <p className="text-base ml-2">(4)</p>
