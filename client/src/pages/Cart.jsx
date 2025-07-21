@@ -45,6 +45,7 @@ const Cart = () => {
     
 
     return products.length > 0 && cartitems ? (
+
         <div className="flex flex-col md:flex-row mt-16">
             <div className='flex-1 max-w-4xl'>
                 <h1 className="text-3xl font-medium mb-6">
@@ -71,7 +72,7 @@ const Cart = () => {
                                     <p>Weight : <span>{product.weight || "N/A"}</span></p>
                                     <div className='flex items-center'>
                                         <p>Qty:</p>
-                                        <select onClick={e => updatecartitem(product._id, Number(e.target.value))} value={cartitems[product._id]} className='outline-none'>
+                                        <select onChange={e => updatecartitem(product._id, Number(e.target.value))} value={cartitems[product._id]} className='outline-none'>
                                             {Array(cartitems[product._id] > 9 ? cartitems[product._id] : 9 ).fill('').map((_, index) => (
                                                 <option key={index} value={index + 1}>{index + 1}</option>
                                             ))}
@@ -81,7 +82,7 @@ const Cart = () => {
                             </div>
                         </div>
                         <p className="text-center">{currency}{product.offerPrice * product.quantity}</p>
-                        <button onClick={ ()=> removeFromCart()} className="cursor-pointer mx-auto">
+                        <button onClick={ ()=> removeFromCart(product._id)} className="cursor-pointer mx-auto">
                             <img src={assets.remove_icon} alt="remove" className='inline-block w-6 h-6' />
                         </button>
                     </div>)
@@ -94,7 +95,7 @@ const Cart = () => {
 
             </div>
 
-            <div className="max-w-[360px] w-full bg-gray-100/40 p-5 max-md:mt-16 border border-gray-300/70">
+            <div className="max-w-[360px] w-full max-h-[500px] bg-gray-100/40 p-5 max-md:mt-16 border border-gray-300/70">
                 <h2 className="text-xl md:text-xl font-medium">Order Summary</h2>
                 <hr className="border-gray-300 my-5" />
 
