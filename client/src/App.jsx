@@ -9,6 +9,7 @@ import Login from './components/Login'
 import Allproduct from './pages/Allproduct'
 import Productcategory from './pages/Productcategory'
 import Productdetails from './pages/Productdetails'
+import Cart from './pages/Cart'
 
 const App = () => {
 
@@ -29,6 +30,7 @@ const App = () => {
           <Route path='/products' element={<Allproduct />} />
           <Route path='/products/:category' element={<Productcategory />} />
           <Route path='/products/:category/:id' element={<Productdetails />} />
+          <Route path='/Cart' element={<Cart />} />
 
         </Routes>
       </div>
