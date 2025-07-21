@@ -1,0 +1,49 @@
+import React, { useEffect } from 'react'
+import { useAppContext } from '../context/Appcontext'
+import { useState } from 'react'
+
+const SellerLogin = () => {
+
+    const {setIsseller,Isseller, navigate} = useAppContext()
+
+    const [email, setemail] = useState('');
+    const [password, setpassword] = useState('');
+
+
+    const onSubmithandler = async (event)=>{
+
+        event.preventDefault();
+        setIsseller(true)
+
+    }
+
+    useEffect(()=>{
+
+        if(Isseller){
+            navigate('/seller')
+        }
+
+    },[Isseller])
+
+  return !Isseller &&  (
+    <form onSubmit={onSubmithandler} className='min-h-screen flex items-center text-sm to-gray-600' >
+
+        <div className='flex flex-col gap-5 m-auto items-start p-8 py-12 min-w-80 sm:min-w-88 rounded-lg shadow-xl border border-gray-200'>
+            <p className='text-2xl font-medium m-auto'><span className='text-primary'>Seller</span>Login</p>
+            <div className='w-full'>
+                <p>Email</p>
+                <input onChange={(e)=> setemail(e.target.value)} value={email} type="email" placeholder='Enter you email' className='border border-gray-200 rounded w-full p-2 mt-1 outline-primary' required />    
+            </div>
+            <div className='w-full'>
+                <p>Password</p>
+                <input onChange={(e)=>setpassword(e.target.value)} value={password} type="password" placeholder='Enter your password'className='border border-gray-200 rounded w-full p-2 mt-1 outline-primary' required  />    
+            </div>
+
+            <button className='bg-primary text-white w-full py-2 rounded-md'>Login</button>
+        </div>
+
+    </form>
+  )
+}
+
+export default SellerLogin
