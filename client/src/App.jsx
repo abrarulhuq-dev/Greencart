@@ -14,6 +14,9 @@ import Addaddress from './pages/Addaddress'
 import Myorder from './pages/Myorder'
 import SellerLogin from './seller/SellerLogin'
 import Sellerlayout from './seller/page/Sellerlayout'
+import Addproduct from './seller/page/Addproduct'
+import Productlist from './seller/page/Productlist'
+import Orders from './seller/page/Orders'
 
 const App = () => {
 
@@ -37,7 +40,15 @@ const App = () => {
           <Route path='/Cart' element={<Cart />} />
           <Route path='/add-address' element={<Addaddress />} />
           <Route path='/my-order' element={<Myorder />} />
-          <Route path='/seller' element={Isseller ? <Sellerlayout/> :<SellerLogin />} />
+          route
+          <Route path='/seller' element={Isseller ? <Sellerlayout/> :<SellerLogin />} > 
+
+            <Route index element={Isseller ? <Addproduct/> : null} />
+            <Route path='product-list' element={<Productlist/>}/>
+            <Route path='orders' element={<Orders/>}/>
+            
+            
+          </Route>
           
         </Routes>
       </div>
