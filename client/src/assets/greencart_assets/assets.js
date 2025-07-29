@@ -152,7 +152,7 @@ export const footerLinks = [
       { text: "Home", url: "/" },
       { text: "Best Sellers", url: "#" },
       { text: "Offers & Deals", url: "#" },
-      { text: "Seller", url: "/seller" },
+      { text: "Become a Seller", url: "/seller" },
       { text: "FAQs", url: "#" },
     ],
   },

@@ -1,22 +1,32 @@
 import React, { useEffect, useState } from 'react'
 import { useAppContext } from '../context/Appcontext'
-import { dummyOrders } from '../assets/greencart_assets/assets'
+
 
 const Myorder = () => {
 
     const [myorders, setmyorders] =  useState([])
-    const { currency } = useAppContext()
+    const { currency, axios, user } = useAppContext()
 
     const fetchMyoder = async() =>{
 
-        setmyorders(dummyOrders)
+         try {
+            const {data} = await axios.get('/api/order/user')
+            if(data.success){
+                setmyorders(data.orders)
+            }
+        } catch (error) {
+            console.log(error) 
+        }
     }
 
     useEffect(()=>{
 
-        fetchMyoder()
+        if (user) {
+            
+            fetchMyoder()
+        }
 
-    })
+    },[user])
 
 
   return (
@@ -58,7 +68,7 @@ const Myorder = () => {
                         </div>
 
                         <p className='text-primary text-lg font-medium'>
-                            Amount : {currency}{item.product.offerPrice * item.quantity}
+                            Amount : {currency}{item.product.offerprice * item.quantity}
                         </p>
 
                     </div>

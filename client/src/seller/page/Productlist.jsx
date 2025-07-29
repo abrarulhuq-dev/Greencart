@@ -1,9 +1,24 @@
 import React from 'react'
 import { useAppContext } from '../../context/Appcontext'
+import toast from 'react-hot-toast'
 
 const Productlist = () => {
 
-   const {products, currency} = useAppContext()
+   const {products, currency, axios, fetchProducts} = useAppContext()
+
+     const toggleStock = async (id, inStock) => {
+        try {
+            const { data } = await axios.post('/api/product/stock', { id, inStock });
+            if (data.success) {
+                fetchProducts();
+                toast.success(data.message)
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
+    }
 
   return (
      <div className=" no-srcollbar flex-1 h-[95vh] overflow-y-scroll flex flex-col justify-between">
@@ -29,10 +44,10 @@ const Productlist = () => {
                                         <span className="truncate max-sm:hidden w-full">{product.name}</span>
                                     </td>
                                     <td className="px-4 py-3">{product.category}</td>
-                                    <td className="px-4 py-3 max-sm:hidden">{currency}{product.offerPrice}</td>
+                                    <td className="px-4 py-3 max-sm:hidden">{currency}{product.offerprice}</td>
                                     <td className="px-4 py-3">
                                         <label className="relative inline-flex items-center cursor-pointer text-gray-900 gap-3">
-                                            <input type="checkbox" className="sr-only peer" defaultChecked={product.inStock} />
+                                            <input type="checkbox" className="sr-only peer" onClick={() => toggleStock(product._id, !product.inStock)} checked={product.inStock} />
                                             <div className="w-12 h-7 bg-slate-300 rounded-full peer peer-checked:bg-blue-600 transition-colors duration-200"></div>
                                             <span className="dot absolute left-1 top-1 w-5 h-5 bg-white rounded-full transition-transform duration-200 ease-in-out peer-checked:translate-x-5"></span>
                                         </label>

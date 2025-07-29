@@ -1,49 +1,68 @@
 import React, { useEffect } from 'react'
 import { useAppContext } from '../context/Appcontext'
 import { useState } from 'react'
+import toast from 'react-hot-toast'
+
 
 const SellerLogin = () => {
 
-    const {setIsseller,Isseller, navigate} = useAppContext()
+    const { setIsseller, Isseller, navigate, axios } = useAppContext()
 
     const [email, setemail] = useState('');
     const [password, setpassword] = useState('');
 
 
-    const onSubmithandler = async (event)=>{
+    const onSubmithandler = async (event) => {
+        try {
+            event.preventDefault();
 
-        event.preventDefault();
-        setIsseller(true)
+            const {data} = await axios.post('/api/seller/login', {email, password})
+
+            if (data.success) {
+
+                setIsseller(true);
+                toast.success(data.message)
+                navigate('/seller');
+                
+                
+            }else{
+                toast.error(data.message)
+            }
+
+        } catch (error) {
+
+            toast.error(error.message)
+        }
 
     }
 
-    useEffect(()=>{
+    useEffect(() => {
 
-        if(Isseller){
+        if (Isseller) {
             navigate('/seller')
         }
 
-    },[Isseller])
+    }, [Isseller])
 
-  return !Isseller &&  (
-    <form onSubmit={onSubmithandler} className='min-h-screen flex items-center text-sm to-gray-600' >
+    return !Isseller && (
+        <form onSubmit={onSubmithandler} className='min-h-screen flex items-center text-sm to-gray-600' >
 
-        <div className='flex flex-col gap-5 m-auto items-start p-8 py-12 min-w-80 sm:min-w-88 rounded-lg shadow-xl border border-gray-200'>
-            <p className='text-2xl font-medium m-auto'><span className='text-primary'>Seller</span>Login</p>
-            <div className='w-full'>
-                <p>Email</p>
-                <input onChange={(e)=> setemail(e.target.value)} value={email} type="email" placeholder='Enter you email' className='border border-gray-200 rounded w-full p-2 mt-1 outline-primary' required />    
+            <div className='flex flex-col gap-5 m-auto items-start p-8 py-12 min-w-80 sm:min-w-88 rounded-lg shadow-xl border border-gray-200'>
+                <p className='text-2xl font-medium m-auto'><span className='text-primary'>Seller</span>Login</p>
+                <div className='w-full'>
+                    <p>Email</p>
+                    <input onChange={(e) => setemail(e.target.value)} value={email} type="email" placeholder='Enter you email' className='border border-gray-200 rounded w-full p-2 mt-1 outline-primary' required />
+                </div>
+                <div className='w-full'>
+                    <p>Password</p>
+                    <input onChange={(e) => setpassword(e.target.value)} value={password} type="password" placeholder='Enter your password' className='border border-gray-200 rounded w-full p-2 mt-1 outline-primary' required />
+                </div>
+
+                <button className='bg-primary text-white w-full py-2 rounded-md'>Login</button>
             </div>
-            <div className='w-full'>
-                <p>Password</p>
-                <input onChange={(e)=>setpassword(e.target.value)} value={password} type="password" placeholder='Enter your password'className='border border-gray-200 rounded w-full p-2 mt-1 outline-primary' required  />    
-            </div>
 
-            <button className='bg-primary text-white w-full py-2 rounded-md'>Login</button>
-        </div>
-
-    </form>
-  )
+        </form>
+    )
 }
 
 export default SellerLogin

@@ -1,16 +1,28 @@
 import React, { useEffect, useState } from 'react'
-import { NavLink, useFetcher } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { assets } from '../assets/greencart_assets/assets'
 import { useAppContext } from '../context/Appcontext'
+import toast from 'react-hot-toast'
 
 const Navbar = () => {
 
     const [open, setOpen] = useState(false)
-    const { user, setUser, setshowuserlogin, navigate, searchquery, setsearchquery, getcartcount, getcartamount } = useAppContext();
+    const { user, setUser, setshowuserlogin, navigate, searchquery, setsearchquery, getcartcount, getcartamount, axios } = useAppContext();
 
     const logout = async () => {
-        setUser(null);
-        navigate('/')
+
+        try {
+            const { data } = await axios.post('/api/user/logout')
+            if (data.success) {
+                setUser(null);
+                navigate('/');
+                toast.success(data.message)
+            } else {
+                toast.error(data.message)
+            }
+        } catch (error) {
+            toast.error(error.message)
+        }
     }
 
     useEffect(() => {
